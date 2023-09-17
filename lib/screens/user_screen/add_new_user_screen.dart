@@ -52,7 +52,12 @@ class CreateUserScreen extends StatelessWidget {
                     controller:cubit.passwordController,
                   ),
                   SizedBox(height: 20.h,),
-                  CustomButton(text: 'Create',)
+                  InkWell(
+                      onTap: ()
+                      {
+                        cubit.AddUser();
+                      },
+                      child: CustomButton(text: 'Create',))
                 ],
               ),
             ),

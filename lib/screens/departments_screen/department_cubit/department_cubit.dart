@@ -1,18 +1,17 @@
 import 'dart:async';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_training/screens/user_screen/model/department_model.dart';
-import 'package:flutter_training/screens/user_screen/model/update_department.dart';
 import 'package:flutter_training/utils/end_points/urls.dart';
 import 'package:meta/meta.dart';
 import '../../../service/dio_helper/dio_helper.dart';
 import '../../../service/sp_helper/sp_helper.dart';
 import '../../../service/sp_helper/sp_keys.dart';
-import '../../user_screen/model/get_departments_model.dart';
+import '../models/department_model.dart';
+import '../models/get_departments_model.dart';
+import '../models/update_department.dart';
 
-part 'user_state.dart';
+part 'department_state.dart';
 
 class DepartmentCubit extends Cubit<DepartmentState> {
   DepartmentCubit() : super(DepartmentInitial());

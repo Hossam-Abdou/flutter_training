@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_training/screens/departments_screen/user_cubit/user_cubit.dart';
-import 'package:flutter_training/screens/user_screen/model/update_department.dart';
 import 'package:flutter_training/screens/departments_screen/update_department.dart';
 
 import 'create_department.dart';
+import 'department_cubit/department_cubit.dart';
 
 class DepartmentsScreen extends StatelessWidget {
 

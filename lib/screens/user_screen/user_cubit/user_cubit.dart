@@ -10,7 +10,6 @@ import 'package:flutter_training/utils/end_points/urls.dart';
 import '../../../service/dio_helper/dio_helper.dart';
 import '../../../service/sp_helper/sp_helper.dart';
 import '../../../service/sp_helper/sp_keys.dart';
-import '../../user_screen/model/get_departments_model.dart';
 import '../model/add_user_model.dart';
 
 part 'user_state.dart';

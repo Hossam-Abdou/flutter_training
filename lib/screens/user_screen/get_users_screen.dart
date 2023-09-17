@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_training/screens/departments_screen/user_cubit/user_cubit.dart';
 import 'package:flutter_training/screens/user_screen/add_new_user_screen.dart';
-import 'package:flutter_training/screens/user_screen/model/update_department.dart';
-import 'package:flutter_training/screens/departments_screen/update_department.dart';
 import 'package:flutter_training/screens/user_screen/update_user_details.dart';
 import 'package:flutter_training/screens/user_screen/user_cubit/user_cubit.dart';
 
