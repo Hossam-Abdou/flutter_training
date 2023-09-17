@@ -2,4 +2,12 @@ class EndPoints{
   static const String LogIn='auth/login';
   static const String baseUrl='https://tasksapp.integration25.com/api/';
   static const String logOut='auth/logout';
+
+  static const String storeDep='department/store';
+  static const String updateDep='department/update';
+  static const String getDepartments='department/index';
+
+  static const String updateUser='user/update';
+  static const String addUser='user/store';
+  static const String getUsers='user/index';
 }

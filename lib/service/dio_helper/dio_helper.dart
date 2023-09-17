@@ -17,9 +17,13 @@ class DioHelper {
   static Future<Response> getData({
     required String url,
     Map<String,dynamic> ?query,
+    String? token,
   })
   async {
-
+    dio!.options.headers = {
+      'Authorization':'Bearer $token',
+      'Accept':'application/json',
+    };
     return await dio!.get(
         url,
         queryParameters:query
@@ -34,12 +38,10 @@ class DioHelper {
   }) {
 
     dio!.options.headers = {
-
-      'content-type':'application/json',
-
-
+      'Authorization':'Bearer $token',
+      'Accept':'application/json',
     };
-    return dio!.post(url, queryParameters: query, data: data);
+    return dio!.post(url, queryParameters: query,data: data);
   }
     static Future<Response> putData({
       required String url,

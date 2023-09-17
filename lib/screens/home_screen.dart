@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_training/screens/login_model/login_cubit/login_model_bloc.dart';
-import 'package:flutter_training/screens/login_model/login_screen.dart';
-import 'package:flutter_training/service/sp_helper/sp_keys.dart';
-
-import '../service/sp_helper/sp_helper.dart';
+import 'package:flutter_training/screens/departments_screen/get_departments_screen.dart';
+import 'package:flutter_training/screens/user_screen/get_users_screen.dart';
 
 class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SystemCubit, LoginModelState>(
-      listener: (context, state) {
-      },
-      builder: (context, state) {
-        return Scaffold(
+    return Scaffold(
           body: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MaterialButton(onPressed: () {
-                  SystemCubit.get(context).logOut();
-                  SharedPrefrenceHelper.removeData(
-                      key: SharedPreferencesKeys.token);
-                  Navigator.pushReplacement(context, MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => DepartmentsScreen(),
                   ));
-                }, child: Text('LogOut'),)
+                }, child:  Text('Department'),),
+                MaterialButton(onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => UsersScreen(),
+                  ));
+                }, child:  Text('Users'),),
+                MaterialButton(onPressed: () {
+                }, child:  Text('----'),),
               ],
             ),
           ),
         );
-      });
+
   }
 }

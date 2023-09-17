@@ -41,6 +41,8 @@ dependencies:
   google_fonts:
   dio: ^5.2.1+1
   shared_preferences: ^2.0.15
+  conditional_builder_null_safety: ^0.0.6
+
 
 
 

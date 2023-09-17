@@ -25,7 +25,9 @@ TextEditingController passwordController= TextEditingController();
 
   Login()async {
     emit(UserLoginLoadingState());
-    DioHelper.postData(url: EndPoints.LogIn, data: {
+    DioHelper.postData(
+        url: EndPoints.LogIn,
+        data: {
       "email": emailController.text,
       "password": passwordController.text
     }).then((value) {
@@ -35,8 +37,11 @@ TextEditingController passwordController= TextEditingController();
         emit(UserLoginSuccessState());
       }
       SharedPrefrenceHelper.saveData(
-          key: SharedPreferencesKeys.token, value: authentication!.data!.token);
-
+          key: SharedPreferencesKeys.token,
+          value: authentication!.data!.token);
+      print("hosaam");
+print(SharedPrefrenceHelper.getData(key: SharedPreferencesKeys.token));
+print("hosaam");
       emailController.clear();
       passwordController.clear();
     }).catchError((error) {
@@ -49,6 +54,7 @@ TextEditingController passwordController= TextEditingController();
     emit(UserLogOutLoadingState());
     DioHelper.postData(url: EndPoints.logOut, data: {
     }).then((value) {
+      print('loggg out');
     }).catchError((error) {
       emit(UserLogOutErrorState());
     });

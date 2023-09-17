@@ -1,35 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class Custom extends StatelessWidget {
-  String? label;
-  final TextEditingController controller;
-  final String? Function(String?)? validator;
+class CustomButton extends StatelessWidget {
+String? text;
 
-
-
-
-  Custom({required this.label,required this.controller,this.validator});
+CustomButton({this.text});
 
   @override
   Widget build(BuildContext context) {
-    return  TextFormField(
-      controller: controller,
-      validator: validator,
-      decoration: InputDecoration(
-        hintText: label,
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xff091E4A)),
-
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xff091E4A),),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xff091E4A),),
-          ),
-
-      ),
+    return Container(
+      width: double.infinity,
+      height: 48.h,
+      color: Color(0xff5a55ca),
+      child: Center(
+          child: Text(
+            text!,
+            style: GoogleFonts.roboto(
+                color: Colors.white, fontSize: 14.sp),
+          )),
     );
   }
 }

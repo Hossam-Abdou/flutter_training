@@ -12,7 +12,6 @@ class UserLoginErrorState extends LoginModelState{
 
 }
 class UserLoginLoadingState extends LoginModelState{}
-class ss extends LoginModelState{}
 
 
 class UserLogOutSuccessState extends LoginModelState{
