@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_training/screens/user_screen/add_new_user_screen.dart';
-import 'package:flutter_training/screens/user_screen/update_user_details.dart';
-import 'package:flutter_training/screens/user_screen/user_cubit/user_cubit.dart';
+import 'package:flutter_training/screens/user/user_cubit/user_cubit.dart';
+import 'package:flutter_training/screens/user/view/update_user_details.dart';
+
+
+import '../../../utils/colors/custom_colors.dart';
+import 'add_new_user_screen.dart';
 
 
 class UsersScreen extends StatelessWidget {
@@ -11,7 +14,6 @@ class UsersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
         var cubit=UserCubit.get(context);
@@ -34,7 +36,7 @@ class UsersScreen extends StatelessWidget {
                 ),
           ),
           floatingActionButton: FloatingActionButton(
-            backgroundColor:  Color(0xff091E4A),
+            backgroundColor:  CustomColors.darkBlue,
             onPressed: ()
             {
               Navigator.push(context, MaterialPageRoute(builder: (context) => CreateUserScreen(),));

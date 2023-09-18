@@ -2,22 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_training/user_page.dart';
+import 'package:flutter_training/utils/colors/custom_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../utils/widgets/custom_button.dart';
-import '../../utils/widgets/custom_field.dart';
-import '../home_screen.dart';
-import 'login_cubit/login_model_bloc.dart';
+import '../../../utils/widgets/custom_button.dart';
+import '../../../utils/widgets/custom_field.dart';
+import '../login_cubit/login_model_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SystemCubit, LoginModelState>(
+    return BlocConsumer<AuthenticateCubit, AuthenticateState>(
       listener: (context, state) async {
         if (state is UserLoginSuccessState) {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeScreen(),
+                builder: (context) => UserPage(),
               ));
 
           const snackBar = SnackBar(
@@ -35,7 +36,7 @@ class LoginScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        var cubit = SystemCubit.get(context);
+        var cubit = AuthenticateCubit.get(context);
         return Scaffold(
           body: Form(
             key: cubit.formKey,
@@ -50,7 +51,8 @@ class LoginScreen extends StatelessWidget {
                         Text(
                           'Welcome Back !',
                           style: GoogleFonts.roboto(
-                              fontSize: 34.sp, color: Color(0xff091E4A)),
+                              fontSize: 34.sp,
+                              color: CustomColors.darkBlue),
                         ),
                         SizedBox(
                           height: 20.h,
@@ -63,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                             style: GoogleFonts.roboto(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.normal,
-                                color: Color(0xff7C808A)),
+                                color:CustomColors.greyText),
                           ),
                         ),
                         SizedBox(
@@ -84,11 +86,14 @@ class LoginScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Checkbox(value: false, onChanged: (value) {}),
+                            Checkbox(value: cubit.authenticateCheckBox, onChanged: (value)
+                            {
+                              cubit.changeCheck();
+                            }),
                             Text(
                               'Keep me Logged In',
                               style: GoogleFonts.roboto(
-                                  fontSize: 16.sp, color: Color(0xff091E4A)),
+                                  fontSize: 16.sp, color: CustomColors.darkBlue),
                             ),
                           ],
                         ),

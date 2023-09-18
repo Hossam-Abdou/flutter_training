@@ -1,24 +1,27 @@
 part of 'login_model_bloc.dart';
 
 @immutable
-abstract class LoginModelState {}
+abstract class AuthenticateState {}
 
-class LoginModelInitial extends LoginModelState {}
+class LoginModelInitial extends AuthenticateState {}
 
-class UserLoginSuccessState extends LoginModelState{
-
-}
-class UserLoginErrorState extends LoginModelState{
+class UserLoginSuccessState extends AuthenticateState{
 
 }
-class UserLoginLoadingState extends LoginModelState{}
-
-
-class UserLogOutSuccessState extends LoginModelState{
+class UserLoginErrorState extends AuthenticateState{
 
 }
-class UserLogOutErrorState extends LoginModelState{
+class UserLoginLoadingState extends AuthenticateState{}
+
+
+class UserLogOutSuccessState extends AuthenticateState{
+
+}
+class UserLogOutErrorState extends AuthenticateState{
 
 
 }
-class UserLogOutLoadingState extends LoginModelState{}
+class UserLogOutLoadingState extends AuthenticateState{}
+
+class CheckBoxChangeState extends AuthenticateState{}
+

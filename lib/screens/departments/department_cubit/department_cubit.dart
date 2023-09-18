@@ -21,6 +21,7 @@ class DepartmentCubit extends Cubit<DepartmentState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController assignManager = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
   DepModel? depModel;

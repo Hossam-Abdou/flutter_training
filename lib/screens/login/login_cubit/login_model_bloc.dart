@@ -1,21 +1,17 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_training/utils/end_points/urls.dart';
 import 'package:meta/meta.dart';
-
-import '../../../model/authentication_model.dart';
 import '../../../service/dio_helper/dio_helper.dart';
 import '../../../service/sp_helper/sp_helper.dart';
 import '../../../service/sp_helper/sp_keys.dart';
-
+import '../model/authentication_model.dart';
 part 'login_model_state.dart';
 
-class SystemCubit extends Cubit<LoginModelState> {
-  SystemCubit() : super(LoginModelInitial());
+class AuthenticateCubit extends Cubit<AuthenticateState> {
+  AuthenticateCubit() : super(LoginModelInitial());
 
-  static SystemCubit get(context) => BlocProvider.of(context);
+  static AuthenticateCubit get(context) => BlocProvider.of(context);
 TextEditingController emailController= TextEditingController();
 TextEditingController passwordController= TextEditingController();
   var formKey=GlobalKey<FormState>();
@@ -39,9 +35,8 @@ TextEditingController passwordController= TextEditingController();
       SharedPrefrenceHelper.saveData(
           key: SharedPreferencesKeys.token,
           value: authentication!.data!.token);
+      print(SharedPrefrenceHelper.getData(key: SharedPreferencesKeys.token));
       print("hosaam");
-print(SharedPrefrenceHelper.getData(key: SharedPreferencesKeys.token));
-print("hosaam");
       emailController.clear();
       passwordController.clear();
     }).catchError((error) {
@@ -52,12 +47,26 @@ print("hosaam");
 
   logOut()async {
     emit(UserLogOutLoadingState());
-    DioHelper.postData(url: EndPoints.logOut, data: {
-    }).then((value) {
+    DioHelper.postData(
+        url: EndPoints.logOut,
+        token: SharedPrefrenceHelper.getData(key: SharedPreferencesKeys.token),
+        data: {
+    }
+    ).then((value) {
+      print('1');
+      SharedPrefrenceHelper.removeData(key: SharedPreferencesKeys.token);
       print('loggg out');
+      emit(UserLogOutSuccessState());
     }).catchError((error) {
+      print('error log out ');
       emit(UserLogOutErrorState());
     });
+  }
+  bool authenticateCheckBox=false;
+  void changeCheck()
+  {
+    authenticateCheckBox=!authenticateCheckBox;
+  emit(CheckBoxChangeState());
   }
 
 

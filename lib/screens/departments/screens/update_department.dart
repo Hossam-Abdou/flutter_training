@@ -2,12 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_training/screens/departments_screen/get_departments_screen.dart';
 import 'package:flutter_training/utils/widgets/custom_button.dart';
 import 'package:flutter_training/utils/widgets/custom_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'department_cubit/department_cubit.dart';
+import '../../../utils/colors/custom_colors.dart';
+import '../department_cubit/department_cubit.dart';
+import 'get_departments_screen.dart';
 
 class UpdateDepartmentScreen extends StatelessWidget {
 int? id;
@@ -32,20 +33,25 @@ UpdateDepartmentScreen({this.id});
               child: Column(
                 children: [
                   Text('Update Department!', style: GoogleFonts.roboto(
-                      fontSize: 34.sp, color: Color(0xff091E4A)),),
+                      fontSize: 34.sp, color:CustomColors.darkBlue),),
                   SizedBox(height: 20.h,),
                   Padding(
                     padding:  EdgeInsets.symmetric(horizontal: 20.0.w),
                     child: Text('Update  department details and assign a new manager to continue work!',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.roboto(
-                          fontSize: 16.sp, color: Color(0xff7C808A))
+                          fontSize: 16.sp, color: CustomColors.greyText)
                       ,),
                   ),
                   SizedBox(height: 20.h,),
                   Custom(
                     label: 'Name',
                     controller:cubit.nameController,
+                  ),
+                  SizedBox(height: 20.h,),
+                  Custom(
+                    label: 'Assign Manager',
+                    controller:cubit.assignManager,
                   ),
                   SizedBox(height: 20.h,),
                   InkWell(

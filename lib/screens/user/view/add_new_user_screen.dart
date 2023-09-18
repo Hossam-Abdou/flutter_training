@@ -2,10 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_training/screens/user_screen/user_cubit/user_cubit.dart';
+import 'package:flutter_training/screens/user/user_cubit/user_cubit.dart';
 import 'package:flutter_training/utils/widgets/custom_button.dart';
 import 'package:flutter_training/utils/widgets/custom_field.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../utils/colors/custom_colors.dart';
+import 'get_users_screen.dart';
+
 
 class CreateUserScreen extends StatelessWidget {
 
@@ -13,17 +17,25 @@ class CreateUserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
+        if(state is NewUserSucc)
+          {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => UsersScreen(),));
+          }
       },
       builder: (context, state) {
         var cubit=UserCubit.get(context);
         return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0.0,
+          ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0.w),
             child: SafeArea(
               child: Column(
                 children: [
                   Text('Add New User!', style: GoogleFonts.roboto(
-                      fontSize: 34.sp, color: Color(0xff091E4A)),),
+                      fontSize: 34.sp, color: CustomColors.darkBlue),),
                   SizedBox(height: 20.h,),
                   Text('Create a new user now and assign them tasks right away.',
                     style: GoogleFonts.roboto(
@@ -51,6 +63,8 @@ class CreateUserScreen extends StatelessWidget {
                     label: 'Password',
                     controller:cubit.passwordController,
                   ),
+
+
                   SizedBox(height: 20.h,),
                   InkWell(
                       onTap: ()
