@@ -7,6 +7,7 @@ import 'package:flutter_training/utils/end_points/urls.dart';
 import '../../../service/dio_helper/dio_helper.dart';
 import '../../../service/sp_helper/sp_helper.dart';
 import '../../../service/sp_helper/sp_keys.dart';
+import '../model/get_employee_model.dart';
 import '../model/get_user_model.dart';
 import '../model/update_user_model.dart';
 part 'user_state.dart';
@@ -19,12 +20,17 @@ class UserCubit extends Cubit<UserState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController depNameController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
   var formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState>drawerKey =GlobalKey<ScaffoldState>();
 
   UpdateUserModel? updateUserModel;
   GetUserModel? getUserModel;
+  GetEmployeeModel? getEmployeeModel;
+ var Groceries= { 'pickles', 'tomato', 'lettuce' };
+
 
   AddUser() async {
     emit(NewUserLoading());
@@ -84,6 +90,7 @@ class UserCubit extends Cubit<UserState> {
       emit(UpdateUserError());
     });
   }
+
   getAllUsers() {
     DioHelper.getData(
         url: EndPoints.getUsers,
@@ -100,6 +107,7 @@ class UserCubit extends Cubit<UserState> {
       }      emit(GetUserError());
     });
   }
+
 
   dynamic selectedCheckbox=0;
   void updateSelectedCheckbox(value) {

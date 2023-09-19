@@ -21,7 +21,7 @@ class DepartmentCubit extends Cubit<DepartmentState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController assignManager = TextEditingController();
+  TextEditingController assignManagerController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
   DepModel? depModel;
@@ -41,7 +41,8 @@ class DepartmentCubit extends Cubit<DepartmentState> {
       if (value.data["code"] == 200 || value.data["code"] == 201) {
         depModel = DepModel.fromJson(value.data);
         print(depModel!.data!.name);
-        print("2");
+        nameController.clear();
+        getAllDepartments();
         emit(NewDepSucc());
       }
     }).catchError((error) {
@@ -66,8 +67,9 @@ class DepartmentCubit extends Cubit<DepartmentState> {
       if (value.data["code"] == 200 || value.data["code"] == 201) {
         depModel = DepModel.fromJson(value.data);
         print(depModel!.data!.name);
-        print("2");
         nameController.clear();
+        assignManagerController.clear();
+        getAllDepartments();
         emit(UpdateDepSucc());
       }
     }).catchError((error) {

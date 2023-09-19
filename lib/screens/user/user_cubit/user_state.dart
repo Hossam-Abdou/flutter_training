@@ -20,7 +20,10 @@ class GetUserLoading extends UserState {}
 class GetUserSucc extends UserState {}
 class GetUserError extends UserState {}
 
+
+
+
+
 class mn extends UserState {}
-class value extends UserState {}
 
 

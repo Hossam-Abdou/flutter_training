@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_training/screens/user/user_cubit/user_cubit.dart';
 import 'package:flutter_training/screens/user/view/update_user_details.dart';
+import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
 
 import '../../../utils/colors/custom_colors.dart';
@@ -18,11 +19,26 @@ class UsersScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit=UserCubit.get(context);
         return Scaffold(
-          body: ListView.builder(
+          appBar: AppBar(
+            backgroundColor:CustomColors.primaryButton,
+            elevation: 0,
+          ),
+          body: cubit.getUserModel==null?  Scaffold(
+        body: Center(
+        child: SimpleCircularProgressBar(
+        progressColors:  [CustomColors.darkBlue],
+          fullProgressColor: CustomColors.primaryButton,
+          mergeMode: true,
+          size: 25,
+
+        ),
+        ),
+        ) : ListView.builder(
             itemCount:cubit.getUserModel?.data?.length,
             shrinkWrap: true,
             itemBuilder: (context, index) =>
-                InkWell(
+                // cubit.getUserModel!.data![index].userType=='employee'?
+              InkWell(
                   onTap: ()
                   {
                     print(cubit.getUserModel!.data![index].id);
@@ -33,7 +49,7 @@ class UsersScreen extends StatelessWidget {
                       title: Text('${cubit.getUserModel!.data![index].name}'),
                     ),
                   ),
-                ),
+                )
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor:  CustomColors.darkBlue,
@@ -41,7 +57,7 @@ class UsersScreen extends StatelessWidget {
             {
               Navigator.push(context, MaterialPageRoute(builder: (context) => CreateUserScreen(),));
             },
-            child: Icon(Icons.add),
+            child: Icon(Icons.person_add_alt_1,color: Colors.white,),
 
           ),
         );

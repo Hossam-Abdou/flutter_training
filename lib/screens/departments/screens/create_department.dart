@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,7 @@ class CreateDepartmentScreen extends StatelessWidget {
       listener: (context, state) {
         if(state is NewDepSucc)
           {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>DepartmentsScreen() ,));
+            Navigator.pop(context, MaterialPageRoute(builder: (context) =>DepartmentsScreen() ,));
           }
       },
       builder: (context, state) {
@@ -44,18 +45,23 @@ class CreateDepartmentScreen extends StatelessWidget {
                         ,),
                     ),
                     SizedBox(height: 20.h,),
-                    Custom(
+                    CustomField(
                       label: 'Name',
                       controller:cubit.nameController,
                     ),
                     SizedBox(height: 20.h,),
-                    InkWell(
-                        onTap: () {
-                          if (cubit.formKey.currentState!.validate()) {
-                            cubit.CreateDep();
-                          }
-                        },
-                        child: CustomButton(text: 'Create',))
+                    ConditionalBuilder(
+                      condition: state is NewDepLoading,
+                      builder:(context) =>  Center(child: CircularProgressIndicator( color: CustomColors.primaryButton,)),
+                      fallback: (context) =>InkWell(
+                          onTap: () {
+                            if (cubit.formKey.currentState!.validate()) {
+                              cubit.CreateDep();
+                            }
+                          },
+                          child: CustomButton(text: 'Create',))
+
+                    )
                   ],
                 ),
               ),

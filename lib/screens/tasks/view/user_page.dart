@@ -5,8 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_training/screens/departments/screens/get_departments_screen.dart';
 import 'package:flutter_training/screens/login/login_cubit/login_model_bloc.dart';
 import 'package:flutter_training/screens/login/view/login_screen.dart';
+import 'package:flutter_training/screens/tasks/view/add_new_task.dart';
+import 'package:flutter_training/screens/tasks/view/edit_task.dart';
+import 'package:flutter_training/screens/user/view/get_employee_screen.dart';
 import 'package:flutter_training/screens/user/view/get_users_screen.dart';
-import 'package:flutter_training/user_tasks.dart';
+import 'package:flutter_training/screens/tasks/view/user_tasks.dart';
 import 'package:flutter_training/utils/colors/custom_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -41,53 +44,8 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
       },
       builder: (context, state) {
 
-        final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
         var cubit=AuthenticateCubit.get(context);
         return Scaffold(
-          key: drawerKey,
-            drawer: Drawer(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MaterialButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DepartmentsScreen(),
-                          ));
-                    },
-                    child: Text('Departments'),
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => UsersScreen(),
-                          ));
-                    },
-                    child: Text('Users'),
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => UserTasks(),
-                          ));
-                    },
-                    child: Text('UserTasks'),
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      cubit.logOut();
-                    },
-                    child: const Text('Log out'),
-                  ),
-                ],
-              ),
-            ),
           backgroundColor: Color(0xffF3FAF9),
           appBar: AppBar(
             bottom: TabBar(
@@ -122,12 +80,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                 Icons.menu_rounded,
                 color: Colors.black,
               ),
-              onPressed: () {
-               drawerKey.currentState?.openDrawer();
-
-              },
-
-
+              onPressed: () {},
             ),
             actions: [
               PopupMenuButton(
@@ -198,7 +151,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                             physics: NeverScrollableScrollPhysics(),
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                childAspectRatio: 8/5.7,
+                                childAspectRatio: 8/6,
                                 mainAxisSpacing: 10,
                                 crossAxisSpacing: 10
                             ),

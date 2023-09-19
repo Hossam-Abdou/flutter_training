@@ -72,9 +72,9 @@ class UserTasks extends StatelessWidget {
         child: Column(
           children: [
           CalendarTimeline(
-            initialDate: DateTime(2020, 4, 12),
+            initialDate: DateTime.now(),
             firstDate: DateTime(2019, 1, 15),
-            lastDate: DateTime(2020, 11, 20),
+            lastDate: DateTime(2030, 11, 20),
             onDateSelected: (date) => print(date),
             leftMargin: 20,
             monthColor: Colors.blueGrey,

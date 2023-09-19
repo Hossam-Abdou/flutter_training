@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_training/screens/departments/screens/update_department.dart';
+import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
 import '../../../utils/colors/custom_colors.dart';
 import '../department_cubit/department_cubit.dart';
@@ -16,7 +17,23 @@ class DepartmentsScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = DepartmentCubit.get(context);
         return Scaffold(
-          body: ListView.builder(
+          appBar: AppBar(
+            backgroundColor:CustomColors.primaryButton,
+            elevation: 0,
+
+
+          ),
+          body: cubit.getDepartment==null?  Scaffold(
+            body: Center(
+              child: SimpleCircularProgressBar(
+                progressColors:  [CustomColors.darkBlue],
+                fullProgressColor: CustomColors.primaryButton,
+                mergeMode: true,
+                size: 25,
+
+              ),
+            ),
+          ) :  ListView.builder(
             itemCount: cubit.getDepartment?.data?.length,
             shrinkWrap: true,
             itemBuilder: (context, index) => InkWell(
@@ -45,7 +62,7 @@ class DepartmentsScreen extends StatelessWidget {
                     builder: (context) => CreateDepartmentScreen(),
                   ));
             },
-            child: Icon(Icons.add),
+            child: Icon(Icons.add,color: Colors.white,),
           ),
         );
       },

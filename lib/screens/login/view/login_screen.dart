@@ -1,12 +1,14 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_training/user_page.dart';
+import 'package:flutter_training/screens/home_screen.dart';
 import 'package:flutter_training/utils/colors/custom_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_field.dart';
+import '../../tasks/view/user_page.dart';
 import '../login_cubit/login_model_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -18,7 +20,7 @@ class LoginScreen extends StatelessWidget {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => UserPage(),
+                builder: (context) => HomeScreen(),
               ));
 
           const snackBar = SnackBar(
@@ -71,14 +73,14 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(
                           height: 20.h,
                         ),
-                        Custom(
+                        CustomField(
                             controller: cubit.emailController,
 
                             label: 'Email'),
                         SizedBox(
                           height: 20.h,
                         ),
-                        Custom(
+                        CustomField(
                             controller: cubit.passwordController,
                             label: 'Paasword'),
                         SizedBox(
@@ -100,15 +102,19 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(
                           height: 20.h,
                         ),
-                        InkWell(
-                          onTap: () {
+                        ConditionalBuilder(
+                            condition: state is UserLoginLoadingState,
+                            builder:(context) =>  Center(child: CircularProgressIndicator( color: CustomColors.primaryButton,)),
+                            fallback:(context) => InkWell(
+                              onTap: () {
 
-                              cubit.emailController.text='hssggs@admin.com';
-                              cubit.passwordController.text='password';
-                              cubit.Login();
-                          },
-                          child:CustomButton(text:'Login') ,
-                        ),
+                                cubit.emailController.text='hssggs@admin.com';
+                                cubit.passwordController.text='password';
+                                cubit.Login();
+                              },
+                              child:CustomButton(text:'Login') ,
+                            ),
+                        )
                       ],
                     ),
                   ),

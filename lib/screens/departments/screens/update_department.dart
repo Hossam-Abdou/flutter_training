@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,7 @@ UpdateDepartmentScreen({this.id});
       listener: (context, state) {
         if(state is UpdateDepSucc)
           {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DepartmentsScreen(),));
+            Navigator.pop(context, MaterialPageRoute(builder: (context) => DepartmentsScreen(),));
           }
       },
       builder: (context, state) {
@@ -44,22 +45,28 @@ UpdateDepartmentScreen({this.id});
                       ,),
                   ),
                   SizedBox(height: 20.h,),
-                  Custom(
+                  CustomField(
                     label: 'Name',
                     controller:cubit.nameController,
                   ),
                   SizedBox(height: 20.h,),
-                  Custom(
+                  CustomField(
                     label: 'Assign Manager',
-                    controller:cubit.assignManager,
+                    controller:cubit.assignManagerController,
                   ),
                   SizedBox(height: 20.h,),
-                  InkWell(
-                    onTap: ()
-                      {
-                        cubit.updateDep(id);
-                      },
-                      child: CustomButton(text: 'Update',))
+                  ConditionalBuilder(
+                      condition: state is UpdateDepLoading,
+                      builder:(context) =>  Center(child: CircularProgressIndicator( color: CustomColors.primaryButton,)),
+                      fallback: (context) =>  InkWell(
+                          onTap: ()
+                          {
+                            cubit.updateDep(id);
+                          },
+                          child: CustomButton(text: 'Update',))
+
+                  )
+
                 ],
               ),
             ),

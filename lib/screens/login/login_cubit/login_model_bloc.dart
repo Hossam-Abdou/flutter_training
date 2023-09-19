@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_training/service/secure_storage.dart';
 import 'package:flutter_training/utils/end_points/urls.dart';
 import 'package:meta/meta.dart';
 import '../../../service/dio_helper/dio_helper.dart';
@@ -37,8 +38,7 @@ TextEditingController passwordController= TextEditingController();
           value: authentication!.data!.token);
       print(SharedPrefrenceHelper.getData(key: SharedPreferencesKeys.token));
       print("hosaam");
-      emailController.clear();
-      passwordController.clear();
+
     }).catchError((error) {
       emit(UserLoginErrorState());
       print(error);
